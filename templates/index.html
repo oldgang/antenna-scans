@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <title>Antenna Scans</title>
+{% endblock %}
+
+{% block body %}
+    <h1>File Upload</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <p><input type="file" name="file" accept=".txt"></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
+    <div>
+        <pre class="code-block"><code class="code-block">{{text}}</code></pre>
+    </div>
+{% endblock %}

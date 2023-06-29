@@ -14,9 +14,9 @@ def readData(path):
 
     #nice printing and sorting
     filteredData.sort(key=lambda row: row[3])
-    return filteredData
+    return tabulate(filteredData, headers=["MAC", "SSID", "Channel", "Signal Strength"])
 
 if __name__ == "__main__":
     path = "C:\\Users\\icema\\OneDrive\\Pulpit\\scan.txt"
     filteredData = readData(path)
-    print (tabulate(filteredData, headers=["MAC", "SSID", "Channel", "Signal Strength"]))
+    print(filteredData)
