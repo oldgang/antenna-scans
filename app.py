@@ -1,29 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, abort, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from main import readData
+from reader import read_data
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.txt']
 app.config['UPLOAD_PATH'] = 'uploads'
-db = SQLAlchemy(app)
-
-class Scan(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    mac = db.Column(db.String(17), nullable=False)
-    ssid = db.Column(db.String(30), nullable=False)
-    channel = db.Column(db.Integer, nullable=False)
-    signal = db.Column(db.Integer, nullable=False)
-
-    def __repr__(self):
-        return '<Scan %r>' % self.id
 
 @app.route('/')
 def index():
-    return render_template('index.html', text=readData(os.path.join(app.config['UPLOAD_PATH'], 'scan.txt')))
+    return render_template('index.html', text=read_data(os.path.join(app.config['UPLOAD_PATH'], 'scan.txt')))
 
 @app.route('/', methods=['POST'])
 def upload_files():
